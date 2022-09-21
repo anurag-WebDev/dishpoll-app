@@ -1,7 +1,12 @@
+import { Box } from "@mui/material";
 import React from "react";
 
 const Dashboard = () => {
-  return <div>Dashboard</div>;
+  return (
+    <>
+      <Box></Box>
+    </>
+  );
 };
 
 export default Dashboard;

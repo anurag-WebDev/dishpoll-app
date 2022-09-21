@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Box, Button, TextField, Typography, Stack } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
 import userData from "../lib/users";
 import "./Login.css";
@@ -13,6 +14,7 @@ function Login() {
 
   const [loginInfo, setLogInInfo] = useState(loginInit);
   const { enqueueSnackbar } = useSnackbar();
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -40,6 +42,7 @@ function Login() {
             variant: "success",
             autoHideDuration: 3000,
           });
+          navigate("/dashboard");
         } else {
           enqueueSnackbar("Password Invalid", {
             variant: "error",
@@ -82,7 +85,7 @@ function Login() {
             </Typography>
             <TextField
               variant="outlined"
-              placeholder="Username"
+              // placeholder="Username"
               id="username"
               label="username"
               name="username"
@@ -92,7 +95,7 @@ function Login() {
             />
             <TextField
               variant="outlined"
-              placeholder="password"
+              // placeholder="Password"
               id="password"
               label="password"
               name="password"
