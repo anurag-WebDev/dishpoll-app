@@ -25,31 +25,51 @@ function Login() {
 
   const logIn = (formData) => {
     // console.log(formData.password);
-    const isValidUserName = userData.filter(
-      (user) => user.username === formData.username
-    );
+    if (validateInputData(formData)) {
+      const isValidUserName = userData.filter(
+        (user) => user.username === formData.username
+      );
 
-    console.log(isValidUserName);
-
-    if (isValidUserName.length) {
       console.log(isValidUserName);
-      if (isValidUserName[0].password === formData.password) {
-        enqueueSnackbar("Logged in Succesfully", {
-          variant: "success",
-          autoHideDuration: 3000,
-        });
+
+      if (isValidUserName.length) {
+        console.log(isValidUserName);
+
+        if (isValidUserName[0].password === formData.password) {
+          enqueueSnackbar("Logged in Succesfully", {
+            variant: "success",
+            autoHideDuration: 3000,
+          });
+        } else {
+          enqueueSnackbar("Password Invalid", {
+            variant: "error",
+            autoHideDuration: 3000,
+          });
+        }
       } else {
-        enqueueSnackbar("Password Invalid", {
+        enqueueSnackbar("Username Invalid", {
           variant: "error",
           autoHideDuration: 3000,
         });
       }
-    } else {
-      enqueueSnackbar("Username Invalid", {
-        variant: "error",
+    }
+  };
+
+  const validateInputData = (inputData) => {
+    if (inputData.username === "") {
+      enqueueSnackbar("Username is a required field", {
+        variant: "warning",
         autoHideDuration: 3000,
       });
+      return false;
+    } else if (inputData.password === "") {
+      enqueueSnackbar("Password is a required field", {
+        variant: "warning",
+        autoHideDuration: 3000,
+      });
+      return false;
     }
+    return true;
   };
 
   return (
