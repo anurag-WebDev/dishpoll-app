@@ -5,8 +5,14 @@ import React from "react";
 import DishesCard from "./DishesCard";
 import "./DishesView.css";
 
-const DishesView = ({ error, isLoading, dishesInfo }) => {
-  console.log(dishesInfo);
+const DishesView = ({
+  error,
+  isLoading,
+  dishesInfo,
+  selectedDishes,
+  setSelectedDishes,
+}) => {
+  // console.log(dishesInfo);
   let dishesList;
   if (error) {
     dishesList = (
@@ -31,11 +37,20 @@ const DishesView = ({ error, isLoading, dishesInfo }) => {
           <Grid
             item
             xs={12}
-            sm={12}
+            sm={3}
             key={dish.id}
-            sx={{ display: "flex", justifyContent: "start" }}
+            sx={{
+              display: "flex",
+              justifyContent: "start",
+              padding: "1rem",
+              height: "auto",
+            }}
           >
-            <DishesCard dish={dish} />
+            <DishesCard
+              dish={dish}
+              selectedDishes={selectedDishes}
+              setSelectedDishes={setSelectedDishes}
+            />
           </Grid>
         ))}
       </Grid>

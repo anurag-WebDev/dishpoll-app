@@ -1,0 +1,10 @@
+.header {
+  background: beige;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  height: 5vh;
+
+  /* place-content: space-between; */
+}

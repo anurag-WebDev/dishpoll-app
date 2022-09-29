@@ -7,3 +7,9 @@
   justify-content: center;
   padding-bottom: 1rem;
 }
+
+.dishrankview {
+  border: solid;
+  border-width: thin;
+  border-color: antiquewhite;
+}

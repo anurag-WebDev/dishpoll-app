@@ -4,15 +4,16 @@ import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
 import userData from "../lib/users";
 import "./Login.css";
+import Header from "./Header";
 
 function Login() {
-  // console.log(userData);
   const loginInit = {
     username: "",
     password: "",
   };
 
   const [loginInfo, setLogInInfo] = useState(loginInit);
+  // const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
 
@@ -32,18 +33,21 @@ function Login() {
         (user) => user.username === formData.username
       );
 
-      console.log(isValidUserName);
+      // console.log(isValidUserName);
 
       if (isValidUserName.length) {
-        console.log(isValidUserName);
+        // console.log(isValidUserName);
 
         if (isValidUserName[0].password === formData.password) {
+          // setIsUserAuthenticated(true);
+          sessionStorage.setItem("isAuthenticated", true);
           enqueueSnackbar("Logged in Succesfully", {
             variant: "success",
             autoHideDuration: 3000,
           });
           navigate("/dashboard");
         } else {
+          sessionStorage.setItem("isAuthenticated", false);
           enqueueSnackbar("Password Invalid", {
             variant: "error",
             autoHideDuration: 3000,
