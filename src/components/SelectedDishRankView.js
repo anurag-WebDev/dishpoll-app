@@ -136,7 +136,9 @@ const SelectedDishRankView = ({
   );
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column" }}>
+    <Box
+      sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+    >
       <Typography variant="h6" sx={{ alignSelf: "center" }}>
         Selected Dishes
       </Typography>
