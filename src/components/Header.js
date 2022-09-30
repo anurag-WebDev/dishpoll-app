@@ -9,7 +9,6 @@ const Header = () => {
   const performLogout = () => {
     sessionStorage.clear();
     window.location.reload();
-    // <Navigate replace to="/" />;
   };
   if (isUserAuthenticated) {
     logout = (
@@ -27,10 +26,8 @@ const Header = () => {
   }
   return (
     <Box className="header">
-      {/* <Stack direction="row"> */}
       <Box className="header-title">DishPoll</Box>
       {logout}
-      {/* </Stack> */}
     </Box>
   );
 };

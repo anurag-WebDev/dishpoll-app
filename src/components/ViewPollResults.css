@@ -1,0 +1,24 @@
+.table {
+  background-color: peru;
+}
+
+.heading {
+  color: blue;
+  border: solid;
+  border-color: yellowgreen;
+  background: bisque;
+  padding: 0.5rem;
+}
+
+.headingBox {
+  display: flex;
+  place-content: center;
+  padding: 1rem;
+}
+
+.poll-page-redirect {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 0.5rem;
+  padding-top: 0.5rem;
+}

@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import { useSnackbar } from "notistack";
 import userData from "../lib/users";
 import "./Login.css";
-import Header from "./Header";
 
 function Login() {
   const loginInit = {
@@ -13,7 +12,6 @@ function Login() {
   };
 
   const [loginInfo, setLogInInfo] = useState(loginInit);
-  // const [isUserAuthenticated, setIsUserAuthenticated] = useState(false);
   const { enqueueSnackbar } = useSnackbar();
   const navigate = useNavigate();
 
@@ -27,23 +25,17 @@ function Login() {
   };
 
   const logIn = (formData) => {
-    // console.log(formData.password);
     if (validateInputData(formData)) {
       const isValidUserName = userData.filter(
         (user) => user.username === formData.username
       );
 
-      // console.log(isValidUserName);
-
       if (isValidUserName.length) {
-        // console.log(isValidUserName);
-
         if (isValidUserName[0].password === formData.password) {
-          // setIsUserAuthenticated(true);
           sessionStorage.setItem("isAuthenticated", true);
           enqueueSnackbar("Logged in Succesfully", {
             variant: "success",
-            autoHideDuration: 3000,
+            autoHideDuration: 1000,
           });
           navigate("/dashboard");
         } else {
@@ -85,7 +77,7 @@ function Login() {
         <Box className="content">
           <Stack spacing={2} className="form">
             <Typography variant="h5" alignSelf="center  ">
-              Login
+              Dish Poll
             </Typography>
             <TextField
               variant="outlined"

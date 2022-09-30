@@ -1,8 +1,10 @@
 import React from "react";
-import { useState } from "react";
-import { TextField, MenuItem, Typography } from "@mui/material";
+import { TextField, MenuItem } from "@mui/material";
+import { useSnackbar } from "notistack";
 
 const SelectDishRank = ({ dish, selectedDishes, setSelectedDishes }) => {
+  const { enqueueSnackbar } = useSnackbar();
+
   const rankingArray = [
     { label: 0, value: 0 },
     { label: 1, value: 1 },
@@ -10,14 +12,10 @@ const SelectDishRank = ({ dish, selectedDishes, setSelectedDishes }) => {
     { label: 3, value: 3 },
   ];
 
-  // const [rank, setRank] = useState(" ");
-
   const handleRankChange = (e) => {
     const dishName = e.target.name;
     const value = e.target.value;
 
-    // setRank(value);
-    // console.log(score);
     const dishRankSelected = [
       {
         dishName: dishName,
@@ -36,11 +34,18 @@ const SelectDishRank = ({ dish, selectedDishes, setSelectedDishes }) => {
       newSelectedDishes = [...dishRankSelected, ...newSelectedDishes];
       // console.log(newSelectedDishes);
       setSelectedDishes(() => [...newSelectedDishes]);
+      enqueueSnackbar("Dish Added", {
+        variant: "success",
+        autoHideDuration: 500,
+      });
     } else {
       setSelectedDishes((prevRank) => [...prevRank, ...dishRankSelected]);
+      enqueueSnackbar("Dish Added", {
+        variant: "success",
+        autoHideDuration: 500,
+      });
     }
   };
-  // console.log(selectedDishes);
 
   return (
     <>
@@ -59,7 +64,6 @@ const SelectDishRank = ({ dish, selectedDishes, setSelectedDishes }) => {
           </MenuItem>
         ))}
       </TextField>
-      {/* <Typography variant="subtitle1">Rank: {rank}</Typography> */}
     </>
   );
 };

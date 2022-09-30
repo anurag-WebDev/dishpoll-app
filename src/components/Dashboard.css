@@ -2,7 +2,7 @@
   padding: 2rem;
 }
 
-.heading {
+.heading-select {
   display: flex;
   justify-content: center;
   padding-bottom: 1rem;
@@ -12,4 +12,12 @@
   border: solid;
   border-width: thin;
   border-color: antiquewhite;
+  height: max-content;
+  background-color: ghostwhite;
+}
+
+.result-page-redirect {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.5rem;
 }

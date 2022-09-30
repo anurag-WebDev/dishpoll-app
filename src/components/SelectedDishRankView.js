@@ -1,5 +1,5 @@
 import { Box, Button, Stack, Typography } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useSnackbar } from "notistack";
 import "./SelectedDishRankView.css";
 
@@ -10,17 +10,32 @@ const SelectedDishRankView = ({
   dishScore,
   setDishScore,
 }) => {
-  const { enqueueSnackbar } = useSnackbar();
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
-  // console.log(selectedDishes);
   useEffect(() => {
-    selectedDishesTotalScore();
+    if (dishScore.length) {
+      const temp = JSON.stringify(dishScore);
+      localStorage.setItem("dishScoreData", temp);
+    }
   }, [dishScore]);
+
+  const action = (snackbarId) => {
+    return (
+      <Button
+        onClick={() => {
+          closeSnackbar(snackbarId);
+        }}
+      >
+        Dismiss
+      </Button>
+    );
+  };
 
   const handleSubmitVote = (e) => {
     e.preventDefault();
     if (selectedDishes.length < 3) {
       enqueueSnackbar("Please select atleast 3 Dishes to cast Vote.", {
+        action: (snackbarId) => action(snackbarId),
         variant: "error",
       });
       return;
@@ -29,6 +44,7 @@ const SelectedDishRankView = ({
       enqueueSnackbar(
         "Please remove Duplicate Dishes and choose Unique Dishes to Cast Vote.",
         {
+          action: (snackbarId) => action(snackbarId),
           variant: "error",
         }
       );
@@ -45,26 +61,22 @@ const SelectedDishRankView = ({
       return 1;
     });
 
-    setDishScore((prevDishScoreFromRank) => [
-      ...prevDishScoreFromRank,
-      ...dishScoreFromRank,
-    ]);
+    if (localStorage.getItem("dishScoreData")) {
+      const prevLocalStorageData = JSON.parse(
+        localStorage.getItem("dishScoreData")
+      );
 
-    // console.log(dishRanks);
-  };
-
-  // console.log(dishScore);
-
-  const selectedDishesTotalScore = () => {
-    let scoreTotalMap = dishScore.reduce((mapAcc, obj) => {
-      if (!mapAcc[obj.name]) {
-        mapAcc[obj.name] = obj.score;
-      } else {
-        mapAcc[obj.name] = mapAcc[obj.name] + obj.score;
+      setDishScore(() => [...prevLocalStorageData, ...dishScoreFromRank]);
+    } else {
+      setDishScore(() => [...dishScoreFromRank]);
+    }
+    enqueueSnackbar(
+      "Selected Dishes Voted Succesfully,click on go to poll page to view results",
+      {
+        action: (snackbarId) => action(snackbarId),
+        variant: "success",
       }
-      return mapAcc;
-    }, new Map());
-    console.log(scoreTotalMap);
+    );
   };
 
   const containsDuplicatesDishes = () => {
@@ -76,8 +88,6 @@ const SelectedDishRankView = ({
     return false;
   };
 
-  // console.log(dishScore);
-
   const handleRemove = (e) => {
     const dishToRemove = e.target.name;
 
@@ -86,8 +96,6 @@ const SelectedDishRankView = ({
     );
 
     setSelectedDishes(() => [...updatedDishRanks]);
-
-    // console.log(updatedDishRanks);
   };
 
   let rankView = selectedDishes
@@ -103,9 +111,7 @@ const SelectedDishRankView = ({
       >
         <Stack direction="row" spacing={2} paddingBottom="1rem">
           <Box sx={{ width: "4rem" }}>
-            {/* <Stack direction="column"> */}{" "}
             <Typography variant="body1">Rank {dish.rank} :</Typography>
-            {/* </Stack> */}
           </Box>
           <Box sx={{ width: "4rem" }}>
             <Typography variant="body1"> {dish.dishName}</Typography>
@@ -131,7 +137,6 @@ const SelectedDishRankView = ({
 
   return (
     <Box sx={{ display: "flex", flexDirection: "column" }}>
-      {/* <Box> */}
       <Typography variant="h6" sx={{ alignSelf: "center" }}>
         Selected Dishes
       </Typography>
@@ -145,7 +150,6 @@ const SelectedDishRankView = ({
       ) : (
         noDishSelected
       )}
-      {/* {selectedDishes.map((dish, index) => )}{" "} */}
     </Box>
   );
 };

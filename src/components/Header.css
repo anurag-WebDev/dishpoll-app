@@ -1,5 +1,5 @@
 .header {
-  background: beige;
+  background: lightgrey;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -7,4 +7,9 @@
   height: 5vh;
 
   /* place-content: space-between; */
+}
+
+.header-title {
+  font-family: sans-serif;
+  font-weight: 600;
 }
