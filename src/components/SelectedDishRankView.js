@@ -89,13 +89,20 @@ const SelectedDishRankView = ({
   };
 
   const handleRemove = (e) => {
-    const dishToRemove = e.target.name;
+    const dishName = e.target.name;
 
     const updatedDishRanks = selectedDishes.filter(
-      (dish) => dish.dishName !== dishToRemove
+      (dish) => dish.dishName !== dishName
     );
 
-    setSelectedDishes(() => [...updatedDishRanks]);
+    const dishToRemove = selectedDishes.filter(
+      (dish) => dish.dishName === dishName
+    );
+    if (dishToRemove.length === 2) {
+      setSelectedDishes(() => [dishToRemove[1], ...updatedDishRanks]);
+    } else {
+      setSelectedDishes(() => [...updatedDishRanks]);
+    }
   };
 
   let rankView = selectedDishes
