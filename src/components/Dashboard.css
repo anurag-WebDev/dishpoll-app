@@ -9,9 +9,17 @@
 }
 
 .dishrankview {
+  height: max-content;
+  width: max-content;
+  display: flex;
+  padding-right: 1rem;
+}
+
+.main-rank-view {
   border: solid;
   border-width: thin;
   border-color: antiquewhite;
+  display: flex;
   height: max-content;
   background-color: ghostwhite;
 }

@@ -81,7 +81,7 @@ const Dashboard = ({
               />
             </Grid>
             <Grid item xs={4} className="dishrankview">
-              <Box>
+              <Box className="main-rank-view">
                 <SelectedDishRankView
                   dishesInfo={dishesInfo}
                   selectedDishes={selectedDishes}
