@@ -20,6 +20,7 @@ const SelectDishRank = ({ dish, selectedDishes, setSelectedDishes }) => {
       {
         dishName: dishName,
         rank: value,
+        id: String(value),
       },
     ];
 
@@ -32,7 +33,7 @@ const SelectDishRank = ({ dish, selectedDishes, setSelectedDishes }) => {
         (dish) => dish.rank !== value
       );
       newSelectedDishes = [...dishRankSelected, ...newSelectedDishes];
-      // console.log(newSelectedDishes);
+
       setSelectedDishes(() => [...newSelectedDishes]);
       enqueueSnackbar("Dish Added", {
         variant: "success",
@@ -50,7 +51,6 @@ const SelectDishRank = ({ dish, selectedDishes, setSelectedDishes }) => {
   return (
     <>
       <TextField
-        id={dish.dishName}
         name={dish.dishName}
         select
         label="Select"
@@ -58,8 +58,8 @@ const SelectDishRank = ({ dish, selectedDishes, setSelectedDishes }) => {
         onChange={(e) => handleRankChange(e)}
         helperText="Select the rank of the Dish"
       >
-        {rankingArray.map((option) => (
-          <MenuItem key={option.value} value={option.value}>
+        {rankingArray.map((option, index) => (
+          <MenuItem key={option.value} id={index} value={option.value}>
             {option.label}
           </MenuItem>
         ))}

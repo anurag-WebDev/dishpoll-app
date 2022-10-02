@@ -12,15 +12,18 @@
   height: max-content;
   width: max-content;
   display: flex;
+  align-items: center;
 }
 
 .main-rank-view {
+  display: flex;
   border: solid;
   border-width: thin;
   border-color: antiquewhite;
-  display: flex;
   height: max-content;
+  width: max-content;
   background-color: ghostwhite;
+  padding: 1rem;
 }
 
 .result-page-redirect {

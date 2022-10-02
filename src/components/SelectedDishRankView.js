@@ -50,13 +50,13 @@ const SelectedDishRankView = ({
       );
       return;
     }
-    const dishScoreFromRank = selectedDishes.map((dish) => {
+    const dishScoreFromRank = selectedDishes.map((dish, index) => {
       if (dish.rank === 1) {
-        return { name: dish.dishName, score: 30 };
+        return { name: dish.dishName, score: 30, id: String(index) };
       } else if (dish.rank === 2) {
-        return { name: dish.dishName, score: 20 };
+        return { name: dish.dishName, score: 20, id: String(index) };
       } else if (dish.rank === 3) {
-        return { name: dish.dishName, score: 10 };
+        return { name: dish.dishName, score: 10, id: String(index) };
       }
       return 1;
     });
@@ -89,20 +89,13 @@ const SelectedDishRankView = ({
   };
 
   const handleRemove = (e) => {
-    const dishName = e.target.name;
+    const id = e.target.id;
 
-    const updatedDishRanks = selectedDishes.filter(
-      (dish) => dish.dishName !== dishName
+    const dishToUpdateAfterRemove = selectedDishes.filter(
+      (dish) => dish.id !== id
     );
 
-    const dishToRemove = selectedDishes.filter(
-      (dish) => dish.dishName === dishName
-    );
-    if (dishToRemove.length === 2) {
-      setSelectedDishes(() => [dishToRemove[1], ...updatedDishRanks]);
-    } else {
-      setSelectedDishes(() => [...updatedDishRanks]);
-    }
+    setSelectedDishes(() => [...dishToUpdateAfterRemove]);
   };
 
   let rankView = selectedDishes
@@ -127,6 +120,7 @@ const SelectedDishRankView = ({
             <Button
               variant="contained"
               name={dish.dishName}
+              id={String(dish.id)}
               onClick={(e) => handleRemove(e)}
             >
               Remove
@@ -144,9 +138,13 @@ const SelectedDishRankView = ({
 
   return (
     <Box
-      sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+      }}
     >
-      <Typography variant="h6" sx={{ alignSelf: "center" }}>
+      <Typography variant="h6" sx={{ alignSelf: "center", padding: "0.5rem" }}>
         Selected Dishes
       </Typography>
       {selectedDishes.length ? (
