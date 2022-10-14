@@ -1,6 +1,9 @@
+To login to the App, please use username,password as amar amar123, akbar akbar123, anthony anthony123.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
 
 ## Available Scripts
 
